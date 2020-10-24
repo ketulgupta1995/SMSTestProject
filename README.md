@@ -122,7 +122,7 @@
 1. get token for user authorisation:
 	* user is ketul 
 	* password is ketul
-
+```
         COMMAND:
         curl -X POST "http://127.0.0.1:8001/token" -H  "accept: application/json" -H  "Content-Type: application/x-www-form-urlencoded" -d "grant_type=&username=ketul&password=ketul&scope=&client_id=&client_secret="
         
@@ -131,7 +131,7 @@
           "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs",
           "token_type": "bearer"
         }
-
+```
 2. get chemical ids
 
     * **use the access_token value in previous token response to auhtorise user else NOT_AUTHORISED error response will be given.**
@@ -434,13 +434,12 @@
     *  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs"
     * Required data in body
         * {"commodity_id":5,"chem_id":18, "percentage": 51}
-    
-    ```
-            COMMAND:
+	
+    ``` COMMAND:
             curl -X POST "http://127.0.0.1:8001/addChemicalToCommodity" -H  "accept: application/json" -H  "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzODE0Mn0.WUeBsQ7d4OZfTggL9Qb7DZhL--wbxm1ZJkpWn8MZvR0" -H  "Content-Type: application/json" -d "{\"chem_id\":18,\"commodity_id\":5,\"percentage\":10}"
             
             RESPONSE:
-            "success"```
+            "success" ```
         
 6. Remove chemical from Chemical Composition:
 
@@ -452,13 +451,10 @@
     *  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs"
     * Required data in body
         * {"commodity_id":5,"chem_id":18}
-    
-    
-            ```
-	    COMMAND:
+           
+	   ```  COMMAND:
             curl -X POST "http://127.0.0.1:8001/removeChemicalFromCommodity" -H  "accept: application/json" -H  "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzODE0Mn0.WUeBsQ7d4OZfTggL9Qb7DZhL--wbxm1ZJkpWn8MZvR0" -H  "Content-Type: application/json" -d "{\"chem_id\":18,\"commodity_id\":5}"
             
-            
             RESPONSE:
-            true```
+            true  ```
 -----------------------------------------------------------------------------------------------------------------------------
