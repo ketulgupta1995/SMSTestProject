@@ -1,4 +1,4 @@
-###The directory structure is as follows:
+### The directory structure is as follows:
 1.  app:
 	* src --code folder
 		* server.py  -fastapi server
@@ -10,6 +10,10 @@
 
 2.  db:
 	* **mysql** is used  as db 
+	* user- root  password- root
+	* command to connect to db after running the appliucation
+		* ``` mysql --host=127.0.0.1 --port=32000 -uroot -p```
+		
 	*	mysql initialisation for tables and data  
 		contains data creation script used while installation.(SMSTestProject/db/user_db_and_data_createion.sql)
 	* **Tables used are as follows:**
@@ -54,43 +58,32 @@
             3 rows in set (0.00 sec)
 
 3.  __docker-compose.yml__  : this file contains how to start both db and fastapi server
-
+4. __install_docker_mysql.sh__  : installs all  the prerequisite for running the application like docker and docker compose and mysql client
 --------------------------------------------------------------------------------------------------
-###My development environment:
+### My development environment:
 1. I have used **ubuntu 18.04** for development and testing
-    * The steps needed to run the application
-	    1. install docker:
-sudo apt-get update
-sudo apt-get install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg-agent \
-    software-properties-common
+    * The steps needed to run the application. All these steps all captured in **install_docker_mysql.sh** 
+    * Please run the file to get these softwares installed
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo apt-key fingerprint 0EBFCD88
-
-sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
-sudo apt-get update
-
-sudo apt-get install docker-ce docker-ce-cli containerd.io
-
-
-		2. start docker service if not running 
-			*       sudo systemctl start docker
-			*       sudo systemctl enable docker
-		3. **check if docker is installed** 
-			*        docker --version
-
-	    4. install docker-compose
-		    *        sudo apt  install docker-compose
-
-	    5. **(Optional)  to login to sql install mysql-client**
-sudo apt install mysql-client-core-5.7
+		```
+		sudo apt-get update
+		sudo apt-get install \
+		    apt-transport-https \
+		    ca-certificates \
+		    curl \
+		    gnupg-agent \
+		    software-properties-common
+		curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+		sudo apt-key fingerprint 0EBFCD88
+		sudo add-apt-repository \
+		   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+		   $(lsb_release -cs) \
+		   stable"
+		sudo apt-get update
+		sudo apt-get install docker-ce docker-ce-cli containerd.io
+		docker --version
+		sudo apt  install docker-compose
+		sudo apt install mysql-client-core-5.7 ```
 
  ### **NOTE** : check if your user has privileges/ access to docker and docker compose
 * if not create a group called docker and add your user to that group 
@@ -100,7 +93,7 @@ sudo apt install mysql-client-core-5.7
         newgrp docker
 ---------------------------------------------------------------------------------------
 
-###INSTALLATION:
+### INSTALLATION:
 * now open terminal to project directory and run:     
  
         docker-compose up
@@ -127,6 +120,8 @@ sudo apt install mysql-client-core-5.7
 ### APIS
 
 1. get token for user authorisation:
+	* user is ketul 
+	* password is ketul
 
         COMMAND:
         curl -X POST "http://127.0.0.1:8001/token" -H  "accept: application/json" -H  "Content-Type: application/x-www-form-urlencoded" -d "grant_type=&username=ketul&password=ketul&scope=&client_id=&client_secret="
@@ -145,7 +140,10 @@ sudo apt install mysql-client-core-5.7
             "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs"
     * replace gibberish text after **"Authorization: Bearer "**  in **COMMAND** to
     *  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs"
+    * No input Required data in request url http://127.0.0.1:8001/listChemicals.
 
+    
+    
             COMMAND:
             curl -X GET "http://127.0.0.1:8001/listChemicals" -H  "accept: application/json" -H  "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzODE0Mn0.WUeBsQ7d4OZfTggL9Qb7DZhL--wbxm1ZJkpWn8MZvR0"
             
@@ -365,7 +363,10 @@ sudo apt install mysql-client-core-5.7
             "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs"
     * replace gibberish text after **"Authorization: Bearer "**  in **COMMAND** to:
     *  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs
+    * Required data in request is commodity id in url http://127.0.0.1:8001/commodity/{numeric_id}.  **id should be between 1 and 49**
 
+    
+    
             COMMAND:
             curl -X GET "http://127.0.0.1:8001/commodity/5" -H  "accept: application/json" -H  "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzODE0Mn0.WUeBsQ7d4OZfTggL9Qb7DZhL--wbxm1ZJkpWn8MZvR0"
             
@@ -414,12 +415,15 @@ sudo apt install mysql-client-core-5.7
             "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs"
     * replace gibberish text after **"Authorization: Bearer "**  in **COMMAND** to
     *  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs"
-
+    * Required data in body : only **commodity_id** is compulsory 
+        * {"commodity_id":5,"price":18,"inventory":5,"name":"commodity name"}
+    
+    ```
             COMMAND:
             curl -X POST "http://127.0.0.1:8001/updateCommodity" -H  "accept: application/json" -H  "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzODE0Mn0.WUeBsQ7d4OZfTggL9Qb7DZhL--wbxm1ZJkpWn8MZvR0" -H  "Content-Type: application/json" -d "{\"commodity_id\":5,\"inventory\":54}"
             
             RESPONE:
-            "success"
+            "success"```
             
 5. Add Chemical to a commodity chemical composition:
     * **use the access_token value in previous token response to auhtorise user else NOT_AUTHORISED error response will be given.**
@@ -428,12 +432,15 @@ sudo apt install mysql-client-core-5.7
             "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs"
     * replace gibberish text after **"Authorization: Bearer "**  in **COMMAND** to
     *  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs"
-
+    * Required data in body
+        * {"commodity_id":5,"chem_id":18, "percentage": 51}
+    
+    ```
             COMMAND:
             curl -X POST "http://127.0.0.1:8001/addChemicalToCommodity" -H  "accept: application/json" -H  "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzODE0Mn0.WUeBsQ7d4OZfTggL9Qb7DZhL--wbxm1ZJkpWn8MZvR0" -H  "Content-Type: application/json" -d "{\"chem_id\":18,\"commodity_id\":5,\"percentage\":10}"
             
             RESPONSE:
-            "success"
+            "success"```
         
 6. Remove chemical from Chemical Composition:
 
@@ -443,11 +450,15 @@ sudo apt install mysql-client-core-5.7
             "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs"
     * replace gibberish text after **"Authorization: Bearer "**  in **COMMAND** to
     *  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs"
-
-            COMMAND:
+    * Required data in body
+        * {"commodity_id":5,"chem_id":18}
+    
+    
+            ```
+	    COMMAND:
             curl -X POST "http://127.0.0.1:8001/removeChemicalFromCommodity" -H  "accept: application/json" -H  "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzODE0Mn0.WUeBsQ7d4OZfTggL9Qb7DZhL--wbxm1ZJkpWn8MZvR0" -H  "Content-Type: application/json" -d "{\"chem_id\":18,\"commodity_id\":5}"
             
             
             RESPONSE:
-            true
+            true```
 -----------------------------------------------------------------------------------------------------------------------------
