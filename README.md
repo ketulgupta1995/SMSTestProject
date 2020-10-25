@@ -89,33 +89,39 @@
 		sudo apt  install docker-compose
 		sudo apt install mysql-client-core-5.7 ```
 
- ### **NOTE** : check if your user has privileges/ access to docker and docker compose
-* if not create a group called docker and add your user to that group 
-	
-        sudo usermod -aG docker $USER
-        newgrp docker
 ---------------------------------------------------------------------------------------
 
 ### INSTALLATION:
-* now open terminal to project directory and run:     
- 
+
+ ### **NOTE** : check if your user has privileges/ access to docker and docker compose
+* if not add your user to docker group 
+	
+        sudo usermod -aG docker $USER
+        newgrp docker
+
+* **In terminal go to project directory** and run:     
+
+        newgrp docker 
         docker-compose up
 
 * There are two services in this setup 
 	1. database : mysql server
-	2. fastapi server
+	2. fastapi server : Application server
 
-* wait till it downloads all the required files and other requirements  
+* Wait till it downloads all the required files and other requirements.
 
-* once it is done open the url :
+* Once it is done open the url :
 
-   * (http://127.0.0.1:8001/docs)
+   *  To test if application started successfully go to (http://127.0.0.1:8001/) 
+   *  You should see {hello:'greetings'}
 
 -----------------------------------------------------------------------------------------------
 
 ### ***NOTE*** :
-* if there is nothing displayed on screen, it means ui library to show docs is not getting downloaded
-* Please install and use following command to test the apis
+* Go to (http://127.0.0.1:8001/docs), click on **LOCK** symbol and use username: ketul and password: ketul, Authorise it
+* All apis have been documented there.
+* **if there is nothing displayed on browser window , it means UI library(swagger-ui) is not getting downloaded**
+* **Please install and use following command to test the apis:**
 
         sudo apt install curl
 
