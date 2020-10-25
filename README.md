@@ -59,6 +59,7 @@
 
 3.  __docker-compose.yml__  : this file contains how to start both db and fastapi server
 4. __install_docker_mysql.sh__  : installs all  the prerequisite for running the application like docker and docker compose and mysql client
+5. __execution_screenshots__  : These are some screenshots of the project taken while testing to show how it works.
 --------------------------------------------------------------------------------------------------
 ### My development environment:
 1. I have used **ubuntu 18.04** for development and testing
@@ -119,9 +120,15 @@
 -----------------------------------------------------------------------------------------------
 ### APIS
 
-1. get token for user authorisation:
-	* user is ketul 
-	* password is ketul
+1. Get token for user authorisation:
+	* user : ketul 
+	* password : ketul
+	
+	
+	| Input Required in body | 
+	| ------------- |
+	| username,password  | 
+	
 ```
         COMMAND:
         curl -X POST "http://127.0.0.1:8001/token" -H  "accept: application/json" -H  "Content-Type: application/x-www-form-urlencoded" -d "grant_type=&username=ketul&password=ketul&scope=&client_id=&client_secret="
@@ -132,7 +139,7 @@
           "token_type": "bearer"
         }
 ```
-2. get chemical ids
+2. Get All Chemicals 
 
     * **use the access_token value in previous token response to auhtorise user else NOT_AUTHORISED error response will be given.**
     * eg if acces_token contains  :
@@ -141,6 +148,12 @@
     * replace gibberish text after **"Authorization: Bearer "**  in **COMMAND** to
     *  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs"
     * No input Required data in request url http://127.0.0.1:8001/listChemicals.
+    	
+	
+	| Input Required in url/body | 
+	| ------------- |
+	| None | 
+	
 
     
     
@@ -193,142 +206,7 @@
                 "chem_id": 10,
                 "name": "Chem No10"
               },
-              {
-                "chem_id": 11,
-                "name": "Chem No11"
-              },
-              {
-                "chem_id": 12,
-                "name": "Chem No12"
-              },
-              {
-                "chem_id": 13,
-                "name": "Chem No13"
-              },
-              {
-                "chem_id": 14,
-                "name": "Chem No14"
-              },
-              {
-                "chem_id": 15,
-                "name": "Chem No15"
-              },
-              {
-                "chem_id": 16,
-                "name": "Chem No16"
-              },
-              {
-                "chem_id": 17,
-                "name": "Chem No17"
-              },
-              {
-                "chem_id": 18,
-                "name": "Chem No18"
-              },
-              {
-                "chem_id": 19,
-                "name": "Chem No19"
-              },
-              {
-                "chem_id": 20,
-                "name": "Chem No20"
-              },
-              {
-                "chem_id": 21,
-                "name": "Chem No21"
-              },
-              {
-                "chem_id": 22,
-                "name": "Chem No22"
-              },
-              {
-                "chem_id": 23,
-                "name": "Chem No23"
-              },
-              {
-                "chem_id": 24,
-                "name": "Chem No24"
-              },
-              {
-                "chem_id": 25,
-                "name": "Chem No25"
-              },
-              {
-                "chem_id": 26,
-                "name": "Chem No26"
-              },
-              {
-                "chem_id": 27,
-                "name": "Chem No27"
-              },
-              {
-                "chem_id": 28,
-                "name": "Chem No28"
-              },
-              {
-                "chem_id": 29,
-                "name": "Chem No29"
-              },
-              {
-                "chem_id": 30,
-                "name": "Chem No30"
-              },
-              {
-                "chem_id": 31,
-                "name": "Chem No31"
-              },
-              {
-                "chem_id": 32,
-                "name": "Chem No32"
-              },
-              {
-                "chem_id": 33,
-                "name": "Chem No33"
-              },
-              {
-                "chem_id": 34,
-                "name": "Chem No34"
-              },
-              {
-                "chem_id": 35,
-                "name": "Chem No35"
-              },
-              {
-                "chem_id": 36,
-                "name": "Chem No36"
-              },
-              {
-                "chem_id": 37,
-                "name": "Chem No37"
-              },
-              {
-                "chem_id": 38,
-                "name": "Chem No38"
-              },
-              {
-                "chem_id": 39,
-                "name": "Chem No39"
-              },
-              {
-                "chem_id": 40,
-                "name": "Chem No40"
-              },
-              {
-                "chem_id": 41,
-                "name": "Chem No41"
-              },
-              {
-                "chem_id": 42,
-                "name": "Chem No42"
-              },
-              {
-                "chem_id": 43,
-                "name": "Chem No43"
-              },
-              {
-                "chem_id": 44,
-                "name": "Chem No44"
-              },
+             .........
               {
                 "chem_id": 45,
                 "name": "Chem No45"
@@ -364,7 +242,12 @@
     * replace gibberish text after **"Authorization: Bearer "**  in **COMMAND** to:
     *  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs
     * Required data in request is commodity id in url http://127.0.0.1:8001/commodity/{numeric_id}.  **id should be between 1 and 49**
-
+	
+	
+	| Input Required in url | 
+	| ------------- |
+	| commodity_id (value between 1 to 40)  | 
+	
     
     
             COMMAND:
@@ -415,9 +298,13 @@
             "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs"
     * replace gibberish text after **"Authorization: Bearer "**  in **COMMAND** to
     *  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs"
-    * Required data in body : only **commodity_id** is compulsory 
-        * {"commodity_id":5,"price":18,"inventory":5,"name":"commodity name"}
-    
+    * Required data in body :
+	
+	| Input Required in body | 
+	| ------------- |
+	|  {"commodity_id":5,"price":18,"inventory":5,"name":"commodity name"} | 
+	|  only **commodity_id** is compulsory |
+	
     ```
             COMMAND:
             curl -X POST "http://127.0.0.1:8001/updateCommodity" -H  "accept: application/json" -H  "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzODE0Mn0.WUeBsQ7d4OZfTggL9Qb7DZhL--wbxm1ZJkpWn8MZvR0" -H  "Content-Type: application/json" -d "{\"commodity_id\":5,\"inventory\":54}"
@@ -433,7 +320,12 @@
     * replace gibberish text after **"Authorization: Bearer "**  in **COMMAND** to
     *  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs"
     * Required data in body
-        * {"commodity_id":5,"chem_id":18, "percentage": 51}
+    
+	| Input Required in body | 
+	| ------------- |
+	|  {"commodity_id":5,"chem_id":18, "percentage": 51} | 
+	|  all are compulsory |
+	
 	
     ``` COMMAND:
             curl -X POST "http://127.0.0.1:8001/addChemicalToCommodity" -H  "accept: application/json" -H  "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzODE0Mn0.WUeBsQ7d4OZfTggL9Qb7DZhL--wbxm1ZJkpWn8MZvR0" -H  "Content-Type: application/json" -d "{\"chem_id\":18,\"commodity_id\":5,\"percentage\":10}"
@@ -450,7 +342,11 @@
     * replace gibberish text after **"Authorization: Bearer "**  in **COMMAND** to
     *  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzNzg1Mn0.aQLwUH316HrvMsz1AKbY1UBWyVXOpm8Jmj9i1L_8fZs"
     * Required data in body
-        * {"commodity_id":5,"chem_id":18}
+        
+	| Input Required in body | 
+	| ------------- |
+	|  {"commodity_id":5,"chem_id":18} | 
+	|  all are compulsory |
            
 	   ```  COMMAND:
             curl -X POST "http://127.0.0.1:8001/removeChemicalFromCommodity" -H  "accept: application/json" -H  "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrZXR1bCIsImV4cCI6MTYwMzUzODE0Mn0.WUeBsQ7d4OZfTggL9Qb7DZhL--wbxm1ZJkpWn8MZvR0" -H  "Content-Type: application/json" -d "{\"chem_id\":18,\"commodity_id\":5}"
