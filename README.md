@@ -63,8 +63,11 @@
 --------------------------------------------------------------------------------------------------
 ### My development environment:
 1. I have used **ubuntu 18.04** for development and testing
-    * The steps needed to run the application. All these steps all captured in **install_docker_mysql.sh** 
-    * Please run the file to get these softwares installed
+    * Following are prerequisites needed to run the application.
+    * All these steps all captured in **install_docker_mysql.sh** 
+    * Run the file install_docker_mysql.sh to get them installed.
+    	* Go to project folder and run ```./install_docker_mysql.sh```
+    	* It does following things:
 
 		```
 		sudo apt-get update
@@ -89,7 +92,6 @@
  ### **NOTE** : check if your user has privileges/ access to docker and docker compose
 * if not create a group called docker and add your user to that group 
 	
-        sudo groupadd docker
         sudo usermod -aG docker $USER
         newgrp docker
 ---------------------------------------------------------------------------------------
